@@ -13,6 +13,16 @@ You _can_ run everything from crontab entries that run as `magento`, but at some
 
 Enter Systemd https://en.wikipedia.org/wiki/Systemd - a much maligned but extremely competent runtime management tool that is now ubiqitous, (and pretty damn good if you can get past the traditional unix position of "one tool to do one thing").
 
+## Caveats
+
+This is not a howto, it's a reference for the approach, reasoning and path we followed when trying to consolidate this problem for our environment.
+
+In the large majority of scenarios, a single (simple) `cron:run` will work for you. Supervise and daemontools may work better for you. A bunch of shell scripts may work better for you.
+
+Once you need to deal with multiple developers across multiple environments doing a whole bunch of random things, seeking a consolidated solution that fits 90% of your use case is generally "enough".
+
+Do consult the links at the bottom of this page - they explain things much better than I do.
+
 ## Systemd quickstart (very quick)
 
 There are two things that you care about with systemd, units (.service) and timers (.timer).
@@ -370,8 +380,6 @@ Lots of options, lots of capabilities
 
 ## References and links
 
-
-
 In no particular order....
 
 1. https://wiki.archlinux.org/index.php/systemd
@@ -380,5 +388,3 @@ In no particular order....
 4. http://alesnosek.com/blog/2016/12/04/controlling-a-multi-service-application-with-systemd/
 5. https://wiki.archlinux.org/index.php/Systemd/Timers
 6. https://fedoramagazine.org/systemd-unit-dependencies-and-order/
-
-
