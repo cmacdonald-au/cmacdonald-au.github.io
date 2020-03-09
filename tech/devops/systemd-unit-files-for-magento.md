@@ -37,7 +37,7 @@ Timers are quasi-cron tasks that operate on a schedule. You specify a timer to t
 
 For this scenario, we only need one set of unit files for the magento cron.
 
-1. `magento-cron.service` which would like like the above, with the three sections we need to run it
+1. `magento-cron.service` which would look like the above, with the three sections we need to run it
 2. `magento-cron.timer` which would have;
    1. `[Unit]` - The main structure that defines what this thing should be called and what we link it to
    2. `[Timer]` - Your repetition and run rules go here (it gets crontab'ish here)
@@ -45,7 +45,7 @@ For this scenario, we only need one set of unit files for the magento cron.
 
 ## The problem statement
 
-If you're running a stock Mage2, there's like a section in your `env.php` that looks like this.
+If you're running a stock Mage2, there's likely a section in your `env.php` similar to this.
 
 ```php
     'cron_consumers_runner' => [
@@ -136,7 +136,7 @@ And then, to generate the list of things we needed, we used a special script tha
 ```bash
 #!/bin/sh
 
-for SERVICE in ${./bin/magento queue:consumers:list}; do
+for SERVICE in $(/var/www/m2/bin/magento queue:consumers:list); do
     NICENAME=$(echo ${SERVICE} | sed -e 's,\.,-,g')
     sed -e "s,%CONSUMERLABEL%,${SERVICE},g" systemservice.template > ${NICENAME}.service
 done
@@ -152,7 +152,7 @@ The output was a collection of unit files that we could start, stop, monitor _an
 * `product_action_attribute-website-update.service`
 * `quoteItemCleaner.service`
 
-At this point, we can ship those files off to the designated processing server, run `systemctl enable async-operations-all.service` and we are covered until we get a proper solution in place.
+At this point, we can ship those files off to the designated processing server, run `systemctl enable async-operations-all.service` (and again for each service we want running on that box), followed by `systemctl enable magento-worker.service` and we are covered until we get a proper solution in place.
 
 ### Breaking down the .service unit file
 
