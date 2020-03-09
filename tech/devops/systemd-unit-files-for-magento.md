@@ -11,8 +11,7 @@ There are crons, there are workers, there are queues and there are indexers.
 
 You _can_ run everything from crontab entries that run as `magento`, but at some point, you'll likely need to manage a daemon differently than Magento wants you to. Likewise, running _everything_ from cron is a quick path to zombie processes and the eventual exhaustion of system limits (numfiles / numprocs are usually the first to go).
 
-Enter [systemd] https://en.wikipedia.org/wiki/Systemd 
-[systemd] - a much maligned but extremely competent runtime management tool that is now ubiqitous, (and pretty damn good if you can get past the traditional unix position of "one tool to do one thing").
+Enter Systemd https://en.wikipedia.org/wiki/Systemd - a much maligned but extremely competent runtime management tool that is now ubiqitous, (and pretty damn good if you can get past the traditional unix position of "one tool to do one thing").
 
 ## Systemd quickstart (very quick)
 
